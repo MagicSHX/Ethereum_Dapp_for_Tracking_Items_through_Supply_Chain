@@ -4,7 +4,7 @@ This repository containts an Ethereum DApp that demonstrates a Supply Chain flow
 
 ## UML:
 
-![UML](images/UML - Activity-Page-1.png)
+![UML](https://github.com/MagicSHX/Ethereum_Dapp_for_Tracking_Items_through_Supply_Chain/images/UML - Activity-Page-1.png)
 ![UML](images/UML - Activity-Page-2.png)
 ![UML](images/UML - Activity-Page-3.png)
 ![UML](images/UML - Activity-Page-4.png)
