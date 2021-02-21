@@ -157,7 +157,7 @@ contract SupplyChain {
   {
     // Add the new item as part of Harvest
     items[_upc].sku = sku;
-    items[_upc].upc = upc;
+    items[_upc].upc = _upc;
     items[_upc].itemState = State.Harvested;
     items[_upc].originFarmerID = _originFarmerID;
     items[_upc].originFarmName = _originFarmName;
@@ -166,7 +166,7 @@ contract SupplyChain {
     items[_upc].originFarmLongitude = _originFarmLongitude;
     items[_upc].productID = _upc + sku;
     items[_upc].productNotes = _productNotes;
-    items[_upc].ownerID = items[_upc].originFarmerID;
+    items[_upc].ownerID = _originFarmerID;
     // Increment sku
     sku = sku + 1;
     // Emit the appropriate event

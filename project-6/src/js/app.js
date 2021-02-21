@@ -60,9 +60,11 @@ App = {
         /// Modern dapp browsers...
         if (window.ethereum) {
             App.web3Provider = window.ethereum;
+            
             try {
                 // Request account access
                 await window.ethereum.enable();
+                
             } catch (error) {
                 // User denied account access...
                 console.error("User denied account access")
@@ -84,7 +86,7 @@ App = {
 
     getMetaskAccountID: function () {
         web3 = new Web3(App.web3Provider);
-
+        web3.eth.defaultAccount = web3.eth.accounts[0];
         // Retrieving accounts
         web3.eth.getAccounts(function(err, res) {
             if (err) {
@@ -128,6 +130,7 @@ App = {
 
         var processId = parseInt($(event.target).data('id'));
         console.log('processId',processId);
+        console.log('event: ',event);
 
         switch(processId) {
             case 1:
@@ -166,22 +169,42 @@ App = {
     harvestItem: function(event) {
         event.preventDefault();
         var processId = parseInt($(event.target).data('id'));
-
+        console.log('farmer: ' + $("#originFarmerID").val());
+        console.log('list of info: ', 
+                    App.upc,
+                    //App.metamaskAccountID, 
+                    $("#originFarmerID").val(), 
+                    App.originFarmName, 
+                    App.originFarmInformation, 
+                    App.originFarmLatitude, 
+                    App.originFarmLongitude, 
+                    App.productNotes)
         App.contracts.SupplyChain.deployed().then(function(instance) {
             return instance.harvestItem(
-                App.upc, 
-                App.metamaskAccountID, 
-                App.originFarmName, 
-                App.originFarmInformation, 
-                App.originFarmLatitude, 
-                App.originFarmLongitude, 
-                App.productNotes
+                //App.upc,
+                //App.metamaskAccountID,
+                //$("#originFarmerID").val(), 
+                //App.originFarmName, 
+                //App.originFarmInformation, 
+                //App.originFarmLatitude, 
+                //App.originFarmLongitude, 
+                //App.productNotes
+
+                $("#upc").val(), 
+                $("#originFarmerID").val(), 
+                $("#originFarmName").val(), 
+                $("#originFarmName").val(), 
+                $("#originFarmName").val(), 
+                $("#originFarmLongitude").val(), 
+                $("#productNotes").val()
             );
         }).then(function(result) {
+            console.log('result: ', result);
             $("#ftc-item").text(result);
             console.log('harvestItem',result);
         }).catch(function(err) {
-            console.log(err.message);
+            console.log('error message: ', err.message);
+
         });
     },
 
