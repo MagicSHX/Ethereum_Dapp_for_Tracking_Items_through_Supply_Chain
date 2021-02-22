@@ -110,6 +110,8 @@ App = {
             App.contracts.SupplyChain = TruffleContract(SupplyChainArtifact);
             App.contracts.SupplyChain.setProvider(App.web3Provider);
             
+
+            App.add_distributor();
             App.fetchItemBufferOne();
             App.fetchItemBufferTwo();
             App.fetchEvents();
@@ -358,7 +360,22 @@ App = {
           console.log(err.message);
         });
         
-    }
+    },
+
+    add_distributor: function () {
+        ///    event.preventDefault();
+        ///    var processId = parseInt($(event.target).data('id'));
+                            
+            App.contracts.SupplyChain.deployed().then(function(instance) {
+              return instance.addDistributor.call($("#distributorID").val(), {from: App.metamaskAccountID});
+            }).then(function(result) {
+              console.log('Distributor added: ', result);
+            }).catch(function(err) {
+              console.log(err.message);
+            });
+        }
+
+
 };
 
 $(function () {
